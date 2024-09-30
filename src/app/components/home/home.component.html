@@ -1,0 +1,14 @@
+<div class="loading" *ngIf="!posts">
+  Loading...
+</div>
+
+<div class="container-fluid mt-3" *ngIf="posts">
+  <h1>{{page_title}}</h1>
+  <hr>
+
+  <h4 *ngIf="posts.length == 0"> <p>Welcome to our blog! Here, we’ll explore a variety of topics, share insights, and provide valuable information to enrich your knowledge. Whether you're here for tips, inspiration, or just to explore new ideas, we’re glad to have you!</p></h4>
+
+  <post-list [posts]="posts" [identity]="identity" [url]="url">  </post-list>
+
+
+</div>

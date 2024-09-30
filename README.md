@@ -19,3 +19,4 @@ The file *global.ts* inside the path:  `..\src\Services\global.ts` contains the 
     export  var  global  = {
      url:  'http://localhost/api-rest-laravel/public/api/',
      ....
+ 

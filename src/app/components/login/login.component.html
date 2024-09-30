@@ -1,0 +1,29 @@
+<div class='col-md-12 mt-3'>
+    <h1>{{page_title}}</h1>
+    <p>
+        Sign in to get started.
+    </p>
+    
+    <form class="col-md-5 ml-0 pl-0" #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" *ngIf='!identity'>
+        
+         <div class="fom-group">
+            <label for="email">Email</label>
+            <input type="email" name="email" class="form-control" #email="ngModel" [(ngModel)]="user.email"  required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+            <small *ngIf="!email.valid && email.touched" class="invalid-feedback d-block">
+                Invalid email
+            </small>
+        </div>  
+         
+        <div class="fom-group">
+            <label for="password">Cotrasena</label>
+            <input type="password" name="passsword" class="form-control" #password="ngModel" [(ngModel)]="user.password" required>
+            <small *ngIf="!password.valid && password.touched" class="invalid-feedback d-block">
+                Invalid password
+            </small>
+        </div>
+
+        <input type="submit" value="Identificarse" class="btn btn-success mt-3" [disabled]="loginForm.invalid"/>
+        
+    </form>
+    
+</div>

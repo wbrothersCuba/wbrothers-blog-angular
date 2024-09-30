@@ -1,0 +1,59 @@
+<div class="col-md-12 mt-3">
+  <h1> {{page_title}}</h1>
+  <p *ngIf="!is_edit">
+    Create a new post
+  </p>
+  <p *ngIf="is_edit && post">
+    Edit the post {{post.title}}
+  </p>
+  <hr>
+  <div class="alert alert-success col-md-5" *ngIf="status=='success'">
+    The data has been saved successfully.
+  </div>
+  <div class="alert alert-danger col-md-5" *ngIf="status=='error'">
+    The data could not be saved successfully.
+  </div>
+  <form action="" class="col-md-5 ml-0 pl-0" #postNew="ngForm" (ngSubmit)="onSubmit(postNew)">
+
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input type="text" name="title" #title="ngModel" [(ngModel)]="post.title" class="form-control" required>
+      <small *ngIf="!title.valid && title.touched" class="invalid-feedback d-block">
+        Invalid title
+      </small>
+    </div>
+
+    <div class="form-group">
+      <label for="content">Content</label>
+      <textarea name="content" [froalaEditor]="froala_options" #content="" ngModel [(ngModel)]="post.content"
+        required> </textarea>
+      <small *ngIf="!title.valid && title.touched" class="invalid-feedback d-block">
+        Invalid Content
+      </small>
+    </div>
+
+
+    <div class="form-group">
+      <label for="category_id">Category</label>
+      <select name="category_id" #category="ngModel" [(ngModel)]="post.category_id" class="form-control">
+        <option *ngFor="let category of categories" value="{{category.id}}">{{category.name}}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="title">Image</label>
+
+      <div *ngIf="is_edit && post.image">
+        <img src="{{url + 'post/image/'+ post.image}}" alt="avatar" class="avatar_edit img-thumbnail">
+    </div>
+
+      <angular-file-uploader [config]=" afuConfig" [resetUpload]=resetVar (ApiResponse)="imageUpload($event)">
+      </angular-file-uploader>
+    </div>
+
+    <input type="submit" value="Save" class="btn btn-success" [disabled]="postNew.invalid" />
+
+  </form>
+
+
+</div>
